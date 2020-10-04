@@ -1,28 +1,30 @@
 package app;
 
-import control.trigger.StartButton;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.AbstractApplicationContext;
 
 public class Main extends Application {
     public static void main(String[] args) { launch(args); }
 
     public void start(Stage stage) {
-        try(AbstractApplicationContext ctx = new AnnotationConfigApplicationContext(
-                wire.CustomViewConfig.class)) {
+        view.button.Start startButton = new view.button.Start();
+        view.button.Clear clearButton = new view.button.Clear();
+        view.label.Result resultLabel = new view.label.Result();
+        view.grid.Overlay overlayGrid = new view.grid.Overlay(startButton,
+                clearButton, resultLabel);
 
-            view.grid.Overlay grid = ctx.getBean("bCustomGrid", view.grid.Overlay.class);
+        control.effect.label.Result resultLabelControl = new control.effect.label.Result();
 
-            StackPane root = new StackPane();
-            root.getChildren().add(grid);
-            stage.setScene(new Scene(root, 300, 250));
+        new control.trigger.button.Start().prime(startButton,
+                resultLabelControl, resultLabel);
+        new control.trigger.button.Clear().prime(clearButton,
+                resultLabelControl, resultLabel);
 
-            new StartButton().prime();
-            stage.show();
-        }
+        StackPane root = new StackPane();
+        root.getChildren().add(overlayGrid);
+        stage.setScene(new Scene(root, 300, 250));
+        stage.show();
     }
 }
