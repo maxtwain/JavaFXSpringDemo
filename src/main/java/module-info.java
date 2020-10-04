@@ -1,15 +1,8 @@
 module mod {
     requires javafx.controls;
-    requires org.controlsfx.controls;
 
-    requires spring.beans;
-    requires spring.boot;
-    requires spring.boot.autoconfigure;
     requires spring.context;
-
-    requires jasypt;
-    requires java.sql;
-    requires java.naming;
+    requires spring.beans;
 
     exports app;
     exports view.button;

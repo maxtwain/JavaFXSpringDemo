@@ -1,23 +1,21 @@
-package control.trigger;
+package control.trigger.button;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 
-public class StartButton {
-    private final view.button.Start button;
+public class Clear {
+    private final view.button.Clear button;
 
-    public StartButton(){
+    public Clear(){
         try(AbstractApplicationContext ctx = new AnnotationConfigApplicationContext(
-                wire.CustomViewConfig.class)) {
-            button = ctx.getBean("bStartButton", view.button.Start.class);
+                wire.OverlayConfig.class)) {
+            button = ctx.getBean("bClearButton", view.button.Clear.class);
         }
     }
 
     public void prime(){
         button.setOnAction(event -> {
-            new control.effect.CustomLabel().sayHello();
+            new control.effect.label.Result().sayNothing();
         });
     }
-
-    // more control functions
 }

@@ -1,16 +1,15 @@
-package control.effect;
+package control.effect.label;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
-import view.label.Result;
 
-public class CustomLabel {
-    Result label;
+public class Result {
+    view.label.Result label;
 
-    public CustomLabel(){
+    public Result(){
         try(AbstractApplicationContext ctx = new AnnotationConfigApplicationContext(
-                wire.CustomViewConfig.class)) {
-            label = ctx.getBean("bCustomLabel", Result.class);
+                wire.OverlayConfig.class)) {
+            label = ctx.getBean("bResultLabel", view.label.Result.class);
         }
     }
 

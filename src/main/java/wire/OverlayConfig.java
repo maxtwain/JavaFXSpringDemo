@@ -5,13 +5,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class CustomViewConfig {
+public class OverlayConfig {
     @Autowired private view.button.Start startButton;
     @Autowired private view.button.Clear clearButton;
     @Autowired private view.label.Result resultLabel;
-
-
-
 
     @Bean public view.button.Start bStartButton() {
         return new view.button.Start();
@@ -22,8 +19,7 @@ public class CustomViewConfig {
     @Bean public view.label.Result bResultLabel() {
         return new view.label.Result();
     }
-    @Bean public view.grid.Overlay bCustomGrid() {
+    @Bean public view.grid.Overlay bOverlayGrid() {
         return new view.grid.Overlay(startButton, clearButton, resultLabel);
     }
-
 }

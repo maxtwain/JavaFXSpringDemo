@@ -1,6 +1,5 @@
 package app;
 
-import control.trigger.StartButton;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
@@ -13,15 +12,16 @@ public class Main extends Application {
 
     public void start(Stage stage) {
         try(AbstractApplicationContext ctx = new AnnotationConfigApplicationContext(
-                wire.CustomViewConfig.class)) {
+                wire.OverlayConfig.class)) {
 
-            view.grid.Overlay grid = ctx.getBean("bCustomGrid", view.grid.Overlay.class);
+            view.grid.Overlay grid = ctx.getBean("bOverlayGrid", view.grid.Overlay.class);
 
             StackPane root = new StackPane();
             root.getChildren().add(grid);
             stage.setScene(new Scene(root, 300, 250));
 
-            new StartButton().prime();
+            new control.trigger.button.Start().prime();
+            new control.trigger.button.Clear().prime();
             stage.show();
         }
     }
